@@ -26,7 +26,7 @@ public class SpringConfigPaser {
             SAXReader reader = new SAXReader();
             //使用当前线程的类加载器得到得到流对象
             is = SpringConfigPaser.class.getClassLoader().getResourceAsStream(springconfig);
-            Document document = reader.read("E:\\code\\git\\my-springIOC\\src\\main\\resources\\applicationContext.xml");
+            Document document = reader.read(is);
             //得到根节点beans
             Element rootElement = document.getRootElement();
             Element element = rootElement.element("component-scan");
