@@ -13,8 +13,8 @@ import java.util.List;
  * @description ：
  * @version: 1.0
  */
-@Service(value = "myService")
-public class OrderServiceImpl implements OrderService {
+@Service(value = "myService2")
+public class OrderServiceImpl2 implements OrderService {
     @Override
     public List<Order> findOrders() {
         List<Order> ordersList = new ArrayList<>();

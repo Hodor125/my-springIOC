@@ -1,5 +1,6 @@
 package com.hodor.test;
 
+import com.hodor.controller.OrderController;
 import org.junit.Test;
 import org.springframework.container.ClassPathXmlApplicationContext;
 
@@ -14,5 +15,7 @@ public class TestSpringIoc {
     @Test
     public void test1() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        OrderController orderController = (OrderController) context.getBean(OrderController.class);
+        orderController.findOrders();
     }
 }

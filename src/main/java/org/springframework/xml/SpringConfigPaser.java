@@ -25,7 +25,8 @@ public class SpringConfigPaser {
         try {
             SAXReader reader = new SAXReader();
             //使用当前线程的类加载器得到得到流对象
-            is = SpringConfigPaser.class.getClassLoader().getResourceAsStream(springconfig);
+//            is = SpringConfigPaser.class.getClassLoader().getResourceAsStream(springconfig);
+            is = Thread.currentThread().getContextClassLoader().getResourceAsStream(springconfig);
             Document document = reader.read(is);
             //得到根节点beans
             Element rootElement = document.getRootElement();

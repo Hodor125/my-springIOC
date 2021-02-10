@@ -14,7 +14,7 @@ import java.util.List;
  * @version: 1.0
  */
 @Controller
-public class OrderController {
+public class OrderController2 {
     @Autowired(value = "myService")
     OrderService orderService;
 
