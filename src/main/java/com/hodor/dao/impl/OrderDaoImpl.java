@@ -1,25 +1,20 @@
-package com.hodor.service.impl;
+package com.hodor.dao.impl;
 
 import com.hodor.bean.Order;
 import com.hodor.dao.OrderDao;
-import com.hodor.service.OrderService;
-import org.springframework.annotation.Autowired;
-import org.springframework.annotation.Service;
+import org.springframework.annotation.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author ：hodor007
- * @date ：Created in 2021/2/7
+ * @date ：Created in 2021/2/13
  * @description ：
  * @version: 1.0
  */
-@Service(value = "myService")
-public class OrderServiceImpl implements OrderService {
-    @Autowired
-    private OrderDao orderDao;
-
+@Repository
+public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> findOrders() {
         List<Order> ordersList = new ArrayList<>();

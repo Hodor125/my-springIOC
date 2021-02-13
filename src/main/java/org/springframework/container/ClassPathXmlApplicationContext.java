@@ -2,6 +2,7 @@ package org.springframework.container;
 
 import org.springframework.annotation.Autowired;
 import org.springframework.annotation.Controller;
+import org.springframework.annotation.Repository;
 import org.springframework.annotation.Service;
 import org.springframework.xml.SpringConfigPaser;
 
@@ -55,7 +56,7 @@ public class ClassPathXmlApplicationContext {
      * 3. 裁取类的全路径如 com.hodor.controller.OrderController
      * 4. 反射创建类
      * 5. 实现对象的依赖注入
-     * @param basePackage
+     * @param basePackage 传入值为com.hodor
      */
     private void loadClasses(String basePackage) {
         //2. 获取需要扫描的包的文件路径 E:\code\git\my-springIOC\target\classes\com\hodor
@@ -122,7 +123,7 @@ public class ClassPathXmlApplicationContext {
             for (String classPath : classPathes) {
                 Class<?> c = Class.forName(classPath);
                 //判断实例化的这个类是否带了注解
-                if(c.isAnnotationPresent(Controller.class) || c.isAnnotationPresent(Service.class)) {
+                if(c.isAnnotationPresent(Controller.class) || c.isAnnotationPresent(Service.class) || c.isAnnotationPresent(Repository.class)) {
                     //实例化
                     Object instance = c.newInstance();
                     Controller controllerAnno = c.getAnnotation(Controller.class);
@@ -172,6 +173,36 @@ public class ClassPathXmlApplicationContext {
                             simpleName = value;
                         }
 //                        System.out.println("simpleName<=======>" + simpleName);
+                        if(iocNameContainer.containsKey(simpleName)) {
+                            throw new Exception("The bean name had already existed in the container");
+                        }
+                        iocNameContainer.put(simpleName, instance);
+                        iocContainer.put(c, instance);
+
+                        Class<?>[] interfaces = c.getInterfaces();
+                        for (Class<?> anInterface : interfaces) {
+                            List<Object> byInterface = iocInterface.get(anInterface);
+                            if(byInterface != null) {
+                                byInterface.add(instance);
+                                iocInterface.put(anInterface, byInterface);
+                            } else {
+                                List<Object> byInstance = new ArrayList<>();
+                                byInstance.add(instance);
+                                iocInterface.put(anInterface, byInstance);
+                            }
+                        }
+                    }
+
+                    Repository repositoryAnno = c.getAnnotation(Repository.class);
+                    if(repositoryAnno != null) {
+                        String simpleName = "";
+                        String value = repositoryAnno.value();
+                        if(value == null || "".equals(value)) {
+                            simpleName = c.getSimpleName();
+                            simpleName = simpleName.toLowerCase().charAt(0) + simpleName.substring(1);
+                        } else {
+                            simpleName = value;
+                        }
                         if(iocNameContainer.containsKey(simpleName)) {
                             throw new Exception("The bean name had already existed in the container");
                         }
