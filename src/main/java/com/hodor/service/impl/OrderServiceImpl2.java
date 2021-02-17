@@ -24,4 +24,10 @@ public class OrderServiceImpl2 implements OrderService {
         ordersList.add(new Order(114, "小米", "2020-11-20", 12800));
         return ordersList;
     }
+
+    @Override
+    public int addOrder(Order order) {
+        System.out.println("新增订单......");
+        return 0;
+    }
 }

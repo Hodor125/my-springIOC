@@ -22,11 +22,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findOrders() {
-        List<Order> ordersList = new ArrayList<>();
-        ordersList.add(new Order(111, "图书", "2020-11-20", 128));
-        ordersList.add(new Order(112, "苹果", "2020-11-20", 12811));
-        ordersList.add(new Order(113, "锤子", "2020-11-20", 12821));
-        ordersList.add(new Order(114, "小米", "2020-11-20", 12800));
+//        List<Order> ordersList = new ArrayList<>();
+//        ordersList.add(new Order(111, "图书", "2020-11-20", 128));
+//        ordersList.add(new Order(112, "苹果", "2020-11-20", 12811));
+//        ordersList.add(new Order(113, "锤子", "2020-11-20", 12821));
+//        ordersList.add(new Order(114, "小米", "2020-11-20", 12800));
+        List<Order> ordersList = orderDao.findOrders();
         return ordersList;
+    }
+
+    @Override
+    public int addOrder(Order order) {
+        System.out.println("新增订单......");
+        return 0;
     }
 }

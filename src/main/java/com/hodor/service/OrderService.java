@@ -12,4 +12,7 @@ import java.util.List;
  */
 public interface OrderService {
     List<Order> findOrders();
+
+    //给这个方法织入AOP
+    int addOrder(Order order);
 }

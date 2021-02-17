@@ -22,4 +22,9 @@ public class OrderController {
         List<Order> orders = orderService.findOrders();
         System.out.println(orders);
     }
+
+    public void addOrder() {
+        int i = orderService.addOrder(new Order(114, "小米", "2020-11-20", 12800));
+
+    }
 }

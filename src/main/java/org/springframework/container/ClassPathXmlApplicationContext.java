@@ -290,8 +290,8 @@ public class ClassPathXmlApplicationContext {
                                 bean = getBean(keyClass);
                                 if(bean == null) {
                                     //如果根据class找不到，就根据接口类匹
-                                    Object beanByInterface = getBeanByInterface(keyClass);
-                                    if(beanByInterface == null) {
+                                    bean = getBeanByInterface(keyClass);
+                                    if(bean == null) {
                                         throw new RuntimeException("No qualifying bean of type '" + aClass + "' available");
                                     }
                                 }
